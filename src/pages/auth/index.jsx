@@ -4,18 +4,42 @@ import Victory from '../../assets/victory.svg'
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { toast } from "sonner"
+import { apiClient } from "@/lib/api-client.js"
+import { SIGNUP_ROUTE } from "@/utils/constants.js"
 const Auth = () =>{
     
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
+    const validateSignup = () =>{
+        if(!email.length){
+            toast.error("Email is required.")
+            return false;
+        }
+
+        if(!password.length){
+            toast.error("Password is required.")
+            return false
+        }
+
+        if(password !== confirmPassword){
+            toast.error("passowrd and confirm password should be same.")
+            return false;
+        }
+        return true;
+    }
+
     const handleLogin = async () => {
         
     }
 
     const handleSignup = async () => {
-        
+        if(validateSignup()){
+            const response = await apiClient.post(SIGNUP_ROUTE,{email,password})
+            console.log({response})
+        }
     }
     
     return(
