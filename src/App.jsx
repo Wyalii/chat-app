@@ -28,10 +28,10 @@ function App() {
       <AuthRoute><Auth/></AuthRoute>
      } />
      <Route path='/chat' element={
-      <AuthRoute><Chat/></AuthRoute>
+      <PrivateRoute><Chat/></PrivateRoute>
      } />
      <Route path='/profile' element={
-      <AuthRoute><Profile/></AuthRoute>
+      <PrivateRoute><Profile/></PrivateRoute>
      } />
      <Route path='*' element={<Navigate to = "/auth" />} />
      </Routes>
