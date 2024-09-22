@@ -82,6 +82,7 @@ export const login = async (request,response,next) => {
 
 export const getUserInfo = async (request,response,next) => {
    try {
+      const userData = await User.findById(request.userId)
       // return response.status(200).json({user:{
       //     id:user.id,
       //     email:user.email,
