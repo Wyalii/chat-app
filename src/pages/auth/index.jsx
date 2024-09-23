@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Background from "../../assets/login2.png"
-import Victory from '../../assets/victory.svg'
+import Background from "../../assets/loginLogo.jpg"
+import Victory from '../../assets/victory1.jpg'
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -79,8 +79,8 @@ const Auth = () =>{
     }
     
     return(
-        <div className=" h-[100vh] w-[100vw] flex justify-center items-center">
-            <div className="h-[80vh] bg-white border-2 border-white text-opacity-90 shadow-2xl w-[80vw] md:w-[90] lg:w-[70] xl:w-[60wv] rounded-3xl grid xl:grid-cols-2">
+        <div className=" h-[100vh] w-[100vw] flex justify-center items-center bg-[url(/src/assets/background2.jpg)] bg-cover" >
+            <div className="h-[80vh] bg-white border-2 border-white text-opacity-90 shadow-2xl w-[80vw] md:w-[90] lg:w-[70] xl:w-[60wv] rounded-3xl grid xl:grid-cols-2 opacity-95">
                 <div className="flex flex-col gap-10 items-center justify-center">
                     <div className="flex items-center justify-center flex-col">
                         <div className="flex items-center justify-center">

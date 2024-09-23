@@ -83,15 +83,18 @@ export const login = async (request,response,next) => {
 export const getUserInfo = async (request,response,next) => {
    try {
       const userData = await User.findById(request.userId)
-      // return response.status(200).json({user:{
-      //     id:user.id,
-      //     email:user.email,
-      //     profileSetup:user.profileSetup,
-      //     firstName:user.firstName,
-      //     lastName:user.lastName,
-      //     image:user.image,
-      //     color:user.color,
-      // }})
+      if(!userData){
+         return response.status(400).send("User with the given Id not found.") 
+      }
+      return response.status(200).json({
+          id:userData.id,
+          email:userData.email,
+          profileSetup:userData.profileSetup,
+          firstName:userData.firstName,
+          lastName:userData.lastName,
+          image:userData.image,
+          color:userData.color,
+      })
       
    } catch (error) {
       console.log(error)
