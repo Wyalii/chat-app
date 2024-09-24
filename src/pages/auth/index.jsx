@@ -1,7 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Background from "../../assets/loginLogo.jpg"
-import Victory from '../../assets/victory1.jpg'
-import { useState } from "react"
+import HoneyPie from '../../assets/honey-pie.gif'
+import HoneyPieMP3 from '../../assets/HoneyPie.mp3'
+import { useState,useRef } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
@@ -10,7 +11,8 @@ import { LOGIN_ROUTE, SIGNUP_ROUTE } from "@/utils/constants.js"
 import { useNavigate } from "react-router-dom"
 import { useAppStore } from "@/store"
 const Auth = () =>{
-    
+    const audioRef = useRef(new Audio(HoneyPieMP3));
+    const [isPlaying, setIsPlaying] = useState(false);
     const navigate = useNavigate()
     const {setUserInfo} = useAppStore()
     const [email,setEmail] = useState("");
@@ -77,6 +79,16 @@ const Auth = () =>{
             }
         }
     }
+
+    const handlePlayMusic = () => {
+        if(isPlaying){
+            audioRef.current.pause()
+            setIsPlaying(false)
+        }else{
+            audioRef.current.play()
+            setIsPlaying(true)
+        }
+    };
     
     return(
         <div className=" h-[100vh] w-[100vw] flex justify-center items-center bg-[url(/src/assets/background2.jpg)] bg-cover" >
@@ -85,7 +97,7 @@ const Auth = () =>{
                     <div className="flex items-center justify-center flex-col">
                         <div className="flex items-center justify-center">
                             <h1 className="text-5xl font-bold md:text-6xl">Welcome</h1>
-                            <img src={Victory} alt="Victory Emoji" className="h-[100px]"></img>
+                            <img src={HoneyPie} alt="Honey Pie Gif" className="h-[100px] rounded-full cursor-pointer" onClick={handlePlayMusic}></img>
                         </div>
                         <p className="font-medium text-center ">Fill in the details to get started with chat-app!</p>
                     </div>
