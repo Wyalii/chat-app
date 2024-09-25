@@ -13,6 +13,9 @@ import { useAppStore } from "@/store"
 const Auth = () =>{
     const audioRef = useRef(new Audio(HoneyPieMP3));
     const [isPlaying, setIsPlaying] = useState(false);
+    const [analyser, setAnalyser] = useState(null);
+    const [dataArray, setDataArray] = useState([]);
+    const canvasRef = useRef(null);
     const navigate = useNavigate()
     const {setUserInfo} = useAppStore()
     const [email,setEmail] = useState("");
@@ -96,8 +99,8 @@ const Auth = () =>{
                 <div className="flex flex-col gap-10 items-center justify-center">
                     <div className="flex items-center justify-center flex-col">
                         <div className="flex items-center justify-center">
-                            <h1 className="text-5xl font-bold md:text-6xl">Welcome</h1>
-                            <img src={HoneyPie} alt="Honey Pie Gif" className="h-[100px] rounded-full cursor-pointer" onClick={handlePlayMusic}></img>
+                            <h1 className="text-5xl font-bold md:text-6xl sm:text-4xl">Welcome</h1>
+                            <img src={HoneyPie} alt="Honey Pie Gif" className="h-[100px] rounded-full cursor-pointer xs:h-[70px]" onClick={handlePlayMusic}></img>
                         </div>
                         <p className="font-medium text-center ">Fill in the details to get started with chat-app!</p>
                     </div>
@@ -122,7 +125,7 @@ const Auth = () =>{
                     </div>
                 </div>
                 <div className="hidden xl:flex items-center justify-center">
-                    <img src={Background} alt="background" className="h-[700px]"></img>
+                    <img src={Background} alt="background" className="h-[600px] "></img>
                 </div>
             </div>
         </div>

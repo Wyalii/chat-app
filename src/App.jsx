@@ -27,6 +27,7 @@ function App() {
 
 const {userInfo,setUserInfo} = useAppStore();
 const [loading,setLoading] = useState(true)  
+
 useEffect(()=>{
 
   const getUserData = async () =>{
@@ -53,6 +54,8 @@ useEffect(()=>{
   }
 
 },[userInfo,setUserInfo])
+
+
 
 if(loading){
   return <div>Loading....</div>

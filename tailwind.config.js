@@ -10,8 +10,17 @@ export default {
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
+  			sm: 'calc(var(--radius) - 4px)',
+			
   		},
+		screens:{
+			sm:{
+				max:"649px"
+			},
+			xs:{
+				max:"380px"
+			}
+		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
