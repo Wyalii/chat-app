@@ -10,7 +10,8 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { apiClient } from "@/lib/api-client"
-import { ADD_PROFILE_IMAGE_ROUTE, HOST, UPDATE_USER_PROFILE } from "@/utils/constants"
+import { ADD_PROFILE_IMAGE_ROUTE, HOST, REMOVE_PROFILE_IMAGE_ROUTE, UPDATE_USER_PROFILE } from "@/utils/constants"
+
 const Profile = () =>{
     const navigate = useNavigate();
     const {userInfo,setUserInfo} = useAppStore();
@@ -97,7 +98,16 @@ const Profile = () =>{
     }
 
     const handleDeleteImage = async () =>{
-
+        try {
+            const response = await apiClient.delete(REMOVE_PROFILE_IMAGE_ROUTE,{withCredentials:true})
+            if(response.status===200){
+                setUserInfo({...userInfo,image: null})
+                toast.success("image removed successffuly.")
+                setImage(null)
+            }
+        } catch (error) {
+            console.log({error})
+        }
     }
     
     return(

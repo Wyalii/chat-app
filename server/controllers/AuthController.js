@@ -159,22 +159,20 @@ export const addProfileImage = async (request,response,next) => {
 export const removeProfileImage = async (request,response,next) => {
    try {
       const { userId } = request;
-      const { firstName, lastName, color} = request.body
-      
-      if(!firstName || !lastName){
-         return response.status(400).send("first name, lastname and color is required.") 
+      const user = User.findById(userId)
+
+      if(!user){
+         return response.status(404).send("User not found.")
       }
 
-      const userData = await User.findByIdAndUpdate(userId, {firstName,lastName,color,profileSetup:true},{new:true,runValidators:true})
-      return response.status(200).json({
-          id:userData.id,
-          email:userData.email,
-          profileSetup:userData.profileSetup,
-          firstName:userData.firstName,
-          lastName:userData.lastName,
-          image:userData.image,
-          color:userData.color,
-      })
+      if(user.image){
+         unlinkSync(user.image)
+      }
+
+      user.image=null;
+      (await user).save()
+
+      return response.status(200).send("profile image removed successffuly.")
       
    } catch (error) {
       console.log(error)
