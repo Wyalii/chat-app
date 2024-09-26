@@ -37,11 +37,12 @@ const Profile = () =>{
     const saveChanges = async () => {
         if(validateProfile()){
             try {
-                const response = apiClient.post(UPDATE_USER_PROFILE,{firstName,lastName,color:selectedColor},{withCredentials:true})
+                const response = await apiClient.post(UPDATE_USER_PROFILE,{firstName,lastName,color:selectedColor},{withCredentials:true})
                 if(response.status === 200 && response.data){
-                    setUserInfo(...response.data)
-                    toast.success("Profile Updated Successfully.")
-                    navigate('/chat');
+                    setUserInfo(response.data)
+                    toast.success("Profile Updated Succesfully.")
+                    navigate("/chat")
+                    
                 }
             } catch (error) {
                 console.log({error})
