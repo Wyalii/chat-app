@@ -1,3 +1,4 @@
+import User from "../models/UserModel.js"
 export const searchContacts = async (request,response,next) => {
     try {
      const {searchTerm} = request.body
@@ -7,7 +8,17 @@ export const searchContacts = async (request,response,next) => {
      }
 
      const sanitizedSearchTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")
-     return response.status(200).send("Logout successfull.")
+     
+
+     const regex = new RegExp(sanitizedSearchTerm, "i")
+
+     const contacts = await User.find({
+       $and: [{ _id: {$ne: request.userId}},{
+         $or: [{firstName:regex}, {email:regex}, {lastName:regex}]
+       }],
+     })
+
+     return response.status(200).json({contacts})
        
     } catch (error) {
        console.log(error)
