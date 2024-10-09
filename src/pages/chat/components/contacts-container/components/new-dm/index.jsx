@@ -24,9 +24,10 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { getColor } from "@/lib/utils";
 import { Avatar } from "@/components/ui/avatar";
 import { AvatarImage } from "@/components/ui/avatar";
+import { useAppStore } from "@/store"
   
 const NewDM = () => {
-
+    const {setSelectedChatType,setSelectedChatData} = useAppStore()
     const [openNewContactModal,setOpenNewContactModal] = useState(false)
     const [searchedContacts, setSearchedContacts] = useState([])
     const searchContacts = async (searchTerm) => {
@@ -46,6 +47,14 @@ const NewDM = () => {
        } catch (error) {
          console.log([error])
        }
+    }
+
+
+    const selectNewContact = (contact) =>{
+       setOpenNewContactModal(false);
+       setSelectedChatType("contact")
+       setSelectedChatData(contact)
+       setSearchedContacts([])
     }
     return(
         <>
@@ -73,7 +82,7 @@ const NewDM = () => {
            <ScrollArea className="h-[250px]">
              <div className="flex flex-col gap-5">
               {
-                searchedContacts.map(contact => <div key={contact._id} className="flex gap-3 items-center cursor-pointer">
+                searchedContacts.map(contact => <div onClick={() => selectNewContact(contact)} key={contact._id} className="flex gap-3 items-center cursor-pointer">
                   <div className="w-12 h-12 relative">
                     <Avatar className = "h-12 w-12 rounded-full overflow-hidden">
                         {
@@ -103,7 +112,7 @@ const NewDM = () => {
            {
             searchedContacts.length <=0 && (
              <div className="flex-1 md:flex mt-5 flex-col justify-center items-center duration-1000 transition-all">
-              <Lottie isClickToPauseDisabled={true} height={100} width={100} options={animationDefaultOptions}/>
+              <Lottie isClickToPauseDisabled={true} height={60} width={60} options={animationDefaultOptions}/>
               <div className="text-opacity-80 text-white flex flex-col gap-5 items-center mt-5 lg:text-2xl text-xl transition-all duration-300 text-center">
                 <h3 className="poppins-medium">
                    <span>Search </span>
