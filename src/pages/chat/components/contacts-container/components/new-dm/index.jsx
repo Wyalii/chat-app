@@ -24,12 +24,15 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { getColor } from "@/lib/utils";
 import { Avatar } from "@/components/ui/avatar";
 import { AvatarImage } from "@/components/ui/avatar";
-import { useAppStore } from "@/store"
+import { useAppStore } from "@/store";
+import HoneyPie from "@/assets/honey-pie.gif"
+import Luffy from "@/assets/luffy1.webp"
   
 const NewDM = () => {
     const {setSelectedChatType,setSelectedChatData} = useAppStore()
     const [openNewContactModal,setOpenNewContactModal] = useState(false)
     const [searchedContacts, setSearchedContacts] = useState([])
+    
     const searchContacts = async (searchTerm) => {
        try {
 
@@ -79,7 +82,10 @@ const NewDM = () => {
             <Input placeholder="search contacts" className="rounded-lg p-6 bg-[#2c2e3b] border-none" onChange={(e)=> searchContacts(e.target.value)}/>
            </div>
 
-           <ScrollArea className="h-[250px]">
+           {
+            searchedContacts.length > 0 && (
+           
+             <ScrollArea className="h-[250px]">
              <div className="flex flex-col gap-5">
               {
                 searchedContacts.map(contact => <div onClick={() => selectNewContact(contact)} key={contact._id} className="flex gap-3 items-center cursor-pointer">
@@ -107,16 +113,18 @@ const NewDM = () => {
                 </div>)
               }
              </div>
-           </ScrollArea>
+             </ScrollArea>
+
+          )}
 
            {
             searchedContacts.length <=0 && (
              <div className="flex-1 md:flex mt-5 flex-col justify-center items-center duration-1000 transition-all">
-              <Lottie isClickToPauseDisabled={true} height={60} width={60} options={animationDefaultOptions}/>
+              <img src={Luffy} alt="Honey Pie Gif" className="h-[150px] rounded-md cursor-pointer xs:h-[170px]"></img>
               <div className="text-opacity-80 text-white flex flex-col gap-5 items-center mt-5 lg:text-2xl text-xl transition-all duration-300 text-center">
                 <h3 className="poppins-medium">
                    <span>Search </span>
-                   <span className="text-purple-500">New</span> <span>Contact</span> <span className="text-purple-500">.</span>
+                   <span className="text-purple-500">New</span> <span>Nakama</span> <span className="text-purple-500">!</span>
                    
                 </h3>
               </div>

@@ -1,12 +1,14 @@
 import React from "react";
 import ProfileInfo from "./components/profile-info";
 import NewDM from "./components/new-dm";
-
+import HoneyPie from "@/assets/honey-pie.gif"
+import Kaguya from "@/assets/kaguya.gif"
 const ContactsContainer = () =>{
     return(
         <div className="relative md:w-[35vw] lg:w-[30vw] xl:w-[20vw] bg-[#1b1c24] border-r-2 border-[#2f303b] w-full">
-            <div className="pt-3">
-                <Logo></Logo>
+            <div className="pt-3 flex items-center justify-center">
+            <img src={Kaguya} alt="Honey Pie Gif" className="h-[100px] rounded-full cursor-pointer xs:h-[70px]"></img> 
+            <span className="text-purple-500 font-bold">Async Chat-App!</span>
             </div>
 
             <div className="my-5">

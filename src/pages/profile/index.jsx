@@ -90,6 +90,7 @@ const Profile = () =>{
         }
         
         const reader = new FileReader()
+        
         reader.onload = () =>{
             setImage(reader.result)
         }
