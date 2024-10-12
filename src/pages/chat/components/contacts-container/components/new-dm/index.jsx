@@ -120,7 +120,7 @@ const NewDM = () => {
            {
             searchedContacts.length <=0 && (
              <div className="flex-1 md:flex mt-5 flex-col justify-center items-center duration-1000 transition-all">
-              <img src={Luffy} alt="Honey Pie Gif" className="h-[150px] rounded-md cursor-pointer xs:h-[170px]"></img>
+              <img src={Luffy} alt="Honey Pie Gif" className="h-[150px] rounded-xl cursor-pointer xs:h-[170px]"></img>
               <div className="text-opacity-80 text-white flex flex-col gap-5 items-center mt-5 lg:text-2xl text-xl transition-all duration-300 text-center">
                 <h3 className="poppins-medium">
                    <span>Search </span>
