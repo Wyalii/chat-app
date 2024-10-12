@@ -13,9 +13,6 @@ import { useAppStore } from "@/store"
 const Auth = () =>{
     const audioRef = useRef(new Audio(HoneyPieMP3));
     const [isPlaying, setIsPlaying] = useState(false);
-    const [analyser, setAnalyser] = useState(null);
-    const [dataArray, setDataArray] = useState([]);
-    const canvasRef = useRef(null);
     const navigate = useNavigate()
     const {setUserInfo} = useAppStore()
     const [email,setEmail] = useState("");
