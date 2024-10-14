@@ -1,7 +1,7 @@
-import { disconnect } from "mongoose";
+import Message from "./models/MessagesModel.js";
 import {Server as SockerIOServer} from "socket.io"
 
-const setupSocket =(server) => {
+const setupSocket = (server) => {
    const io = new SockerIOServer(server,{
     cors:{
         origin: process.env.ORIGIN,
@@ -22,7 +22,26 @@ const setupSocket =(server) => {
         }
     }
 
-   io.on("connection", (socket)=>{
+
+    const sendMessage = async (message) =>{
+       const senderSocketId = userSocketMap.get(message.sender);
+       const recipientSocketId = userSocketMap.get(message.recipient);
+
+       const createdMessage = await Message.create(message)
+
+       const messageData = await Message.findById(createdMessage._id).populate("sender","id email firstName LastName image color").populate("recipient","id email firstName LastName image color")
+
+       if(recipientSocketId){
+        io.to(recipientSocketId).emit("reciveMessage", messageData)
+       }
+
+       if(senderSocketId){
+        io.to(senderSocketId).emit("reciveMessage", messageData)
+       }
+
+    }
+
+    io.on("connection", (socket)=>{
     const userId = socket.handshake.query.userId;
 
     if(userId){
@@ -32,7 +51,7 @@ const setupSocket =(server) => {
         console.log("user id not provided during connection.")
     }
 
-
+    socket.on("sendMessage",sendMessage)
     socket.on("disconnect", ()=>disconnect(socket))
 
    })
