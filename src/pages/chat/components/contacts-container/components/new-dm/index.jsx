@@ -12,11 +12,8 @@ import {
     DialogDescription,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
   } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
-import Lottie from "react-lottie" 
-import { animationDefaultOptions } from "@/lib/utils"; 
 import { apiClient } from "@/lib/api-client"
 import { SEARCH_CONTACTS_ROUTES } from "@/utils/constants"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -25,8 +22,8 @@ import { getColor } from "@/lib/utils";
 import { Avatar } from "@/components/ui/avatar";
 import { AvatarImage } from "@/components/ui/avatar";
 import { useAppStore } from "@/store";
-import HoneyPie from "@/assets/honey-pie.gif"
 import Luffy from "@/assets/luffy1.webp"
+import { HOST } from "@/utils/constants"
   
 const NewDM = () => {
     const {setSelectedChatType,setSelectedChatData} = useAppStore()

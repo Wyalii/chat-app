@@ -1,7 +1,6 @@
 import React from "react";
 import ProfileInfo from "./components/profile-info";
 import NewDM from "./components/new-dm";
-import HoneyPie from "@/assets/honey-pie.gif"
 import Kaguya from "@/assets/kaguya.gif"
 const ContactsContainer = () =>{
     return(
