@@ -1,8 +1,8 @@
-import Message from "server/models/MessagesModel";
+import Message from "../models/MessagesModel.js"
 export const getMessages = async (request,response,next) => {
     try {
      const user1 = request.userId;
-     const user2 = req.body.id;
+     const user2 = request.body.id;
 
      if(!user1 || !user2){
         return response.status(400).send("both user ID's are required.")
