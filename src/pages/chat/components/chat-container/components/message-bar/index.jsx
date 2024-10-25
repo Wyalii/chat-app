@@ -67,7 +67,8 @@ const MessageBar = () =>{
         formData.append("file",file)
         const response = await apiClient.post(UPLOAD_FILE_ROUTE,formData,{withCredentials:true})
 
-        if(response.status ===200 && response.data){
+        if(response.status === 200 && response.data.filePath){
+          console.log(response.data.filePath)
           if(selectedChatType === "contact"){
             socket.emit("sendMessage",{
               sender:userInfo.id,
@@ -78,8 +79,10 @@ const MessageBar = () =>{
             })
           }
         }
+        
       }
       console.log({file})
+      
     }
     return(
         <div className="h-[10vh] bg=[#1c1d25] flex justify-center items-center px-8 mb-6 gap-6">
@@ -89,7 +92,7 @@ const MessageBar = () =>{
                     <GrAttachment className="text-2xl"></GrAttachment>
                 </button>
 
-                <input type="file" className="hidden" ref={fileInputRef} onChange={handleAttachmentChange} accept="*/*"></input>
+                <input type="file" className="hidden" ref={fileInputRef} onChange={()=> handleAttachmentChange(event)} accept="*/*"></input>
 
                 <div className="relative">
                   <button className="text-neutral-500 focus:border-none focus:outline-none focus:text-white duration-300 transition-all" onClick={()=> setEmojiPickerOpen(true)}>

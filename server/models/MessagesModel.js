@@ -23,14 +23,14 @@ const messageSchema = new mongoose.Schema({
     content:{
         type:String,
         required: function (){
-           return this.messageType ==="text"
+           return this.messageTypes ==="text"
         },
     },
 
-    fileURL:{
+    fileUrl:{
       type:String,
       required: function (){
-        return this.messageType ==="file"
+        return this.messageTypes ==="file"
       },
     },
 

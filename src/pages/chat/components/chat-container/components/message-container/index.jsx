@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import moment from "moment";
 import { apiClient } from "@/lib/api-client";
 import { GET_ALL_MESSAGES_ROUTE } from "@/utils/constants";
+import { HOST } from "@/utils/constants";
 
 const MessageContainer = () =>{
 
@@ -36,6 +37,12 @@ const MessageContainer = () =>{
       }
     },[selectedChatMessages])
 
+
+    const checkIfImage = (filePath) =>{
+      const imageRegex = /\.(jpg|jpeg|png|gif|bmp|tiff|tif|webp|svg|ico|heic|heif)$/i;
+      return imageRegex.test(filePath);
+    }
+
     const renderMessages = () =>{
       let lastDate = null;
       return selectedChatMessages.map((message,index) =>{
@@ -57,6 +64,7 @@ const MessageContainer = () =>{
     }
 
     const renderDMMessages = (message)=>( 
+      
     <div className={`${message.sender === selectedChatData._id ? "text-left" : "text-right"}`}>
 
       {
@@ -66,11 +74,24 @@ const MessageContainer = () =>{
          </div> 
          
         ) 
-     }
+      }
+
+{message.messageTypes === "file" && (
+  <div className={`${message.sender !== selectedChatData._id ? "bg-[#8417ff]/5 text-[#8417ff]/90 border-[#8417ff]/50" : "bg-[#2a2b33]/5 text-white/80 border-[#ffff]/20"} border inline-block p-4 rounded my-1 max-w-[50%] break-words`}>
+    {checkIfImage(message.fileUrl) ? (
+      <div className="cursor-pointer">
+        <img src={`${HOST}/${message.fileUrl}`} height={300} width={300} alt="Uploaded file" />
+      </div>
+    ) : (
+      <div className="no image"></div>
+    )}
+  </div>
+)}
+
 
      <div className="text-xs text-gray-600">
         {
-            moment(message.timestamp).format("TL")
+            moment(message.timestamp).format("LT")
         }
      </div>
 
