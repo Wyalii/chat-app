@@ -1,16 +1,19 @@
 import { useAppStore } from "@/store";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import moment from "moment";
 import { apiClient } from "@/lib/api-client";
 import { GET_ALL_MESSAGES_ROUTE } from "@/utils/constants";
 import { HOST } from "@/utils/constants";
 import {MdFolderZip} from "react-icons/md"
 import {IoMdArrowRoundDown} from "react-icons/io"
+import { IoCloseSharp } from "react-icons/io5";
 
 const MessageContainer = () =>{
 
     const scrollRef = useRef()
     const{selectedChatType, selectedChatData, userInfo, selectedChatMessages,setSelectedChatMessages} = useAppStore();
+    const [showImage,setShowImage] = useState(false)
+    const [ImageUrl,setImageUrl] = useState(null)
 
     useEffect(() => {
       
@@ -94,7 +97,7 @@ const MessageContainer = () =>{
 {message.messageTypes === "file" && (
   <div className={`${message.sender !== selectedChatData._id ? "bg-[#8417ff]/5 text-[#8417ff]/90 border-[#8417ff]/50" : "bg-[#2a2b33]/5 text-white/80 border-[#ffff]/20"} border inline-block p-4 rounded my-1 max-w-[50%] break-words`}>
     {checkIfImage(message.fileUrl) ? (
-      <div className="cursor-pointer">
+      <div className="cursor-pointer" onClick={()=> {setShowImage(true); setImageUrl(message.fileUrl)}}>
         <img src={`${HOST}/${message.fileUrl}`} height={300} width={300} alt="Uploaded file" />
       </div>
     ) : (
@@ -124,6 +127,24 @@ const MessageContainer = () =>{
         <div className="flex-1 overflow-y-scroll p-4 px-8 w-full scrollbar-thin scrollbar-thumb-purple-600 scrollbar-track-purple-300 ">
             {renderMessages()}
             <div ref={scrollRef}/>
+            {
+              showImage && (<div className="fixed z-[1000] top-0 left-0 h-[100vh] w-[100vw] flex items-center justify-center backdrop-blur-lg flex-col">
+                <div>
+                  <img src={`${HOST}/${ImageUrl}`} className="h-[80vh] w-full bg-cover"></img>
+                </div>
+
+                <div className="felx gap-5 top-0 mt-5">
+                   <button className="bg-black/20 p-3 text-2xl rounded-full hover:bg-black/50 cursor-pointer transition-all duration-300" onClick={() => downloadFile(ImageUrl)}>
+                     <IoMdArrowRoundDown/>
+                   </button>
+
+                   <button className="bg-black/20 p-3 text-2xl rounded-full hover:bg-black/50 cursor-pointer transition-all duration-300" onClick={() => {setShowImage(false); setImageUrl(null)}}>
+                     <IoCloseSharp/>
+                   </button>
+                </div>
+              </div>)
+
+            }
         </div>
     )
 }
