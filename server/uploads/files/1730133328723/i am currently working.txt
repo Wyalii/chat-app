@@ -1,0 +1,35 @@
+i am currently working on a chat application designed to facilitate real-time communication between users. This project has allowed me to create my first backend server code, providing valuable experience in building full-stack applications,  I am using Kishan Sheth's youtube videos as a scheme and guide for building this project. His tutorials provide valuable insights and practical examples that help me navigate modern web development practices.
+
+Kishan Seth's Youtube: https://www.youtube.com/@KishanSheth21
+
+Kishan Seth's Linkedin: https://www.linkedin.com/in/koolkishan/
+
+
+
+This project is far from finished, and I am currently focused on developing new page designs and features to enhance the application where Kishan's videos are gonna be very helpful. I will be linking my repository for this application, so feel free to check it out!
+
+Github Repositroy: https://github.com/Wyalii/chat-app
+
+
+
+Key Components: 
+
+
+
+Backend Development: Developed the server using Express.js, allowing for efficient handling of requests and real-time chat functionality.
+
+
+
+Database Integration: Utilized MongoDB and Mongoose for data storage and management, ensuring seamless data interactions.
+
+
+
+Frontend Framework: Built the user interface using React and Vite, providing a fast and responsive experience.
+
+
+
+Styling: Employed TailwindCSS to create a visually appealing and mobile-friendly design.
+
+
+
+User Authentication: Implemented JWT tokens and cookies for secure user authorization, along with middleware to manage session validation effectively.

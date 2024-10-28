@@ -1,0 +1,77 @@
+using System;
+using System.Linq;
+namespace MyApplication
+{
+    
+    public class Program
+    {
+ 
+      
+        
+        static void Main()
+        {
+
+            
+
+            int[] nums1 = { 1, -2, 3, 0, -4, 5 };
+            var query1 = from n in nums1
+                           where n > 0
+                           select n;
+
+             foreach(var n in query1){
+                Console.WriteLine(n);
+             }
+
+
+             int[] nums2 = { 1, -2, 3, -3, 0, -8, 12, 19, 6, 9, 10 };
+
+             var query2 = from n in nums2
+                              where n > 0 && n <=10
+                              select n;
+
+             foreach(var n in query2){
+                Console.WriteLine(n);
+             }
+
+
+             string[] strs = { ".com", ".net", "hsNameA.com", "hsNameB.net",
+    				    "test", ".network", "hsNameC.net", "hsNameD.com" };
+
+             var query3 = from s in strs 
+                           let dom = s.Split('.').Last()
+                           where dom == "net"
+                           select s;
+
+             foreach(var n in query3){
+                Console.WriteLine(n);
+             } 
+
+
+                          
+
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+using System;
+namespace MyApplication
+{
+    public class BankAccount
+    {
+        public string Name {get;set;}
+        public string LastName {get;set}
+        public int AccountNumber {get;set}
+        public int Balance {get;set}
+
+    }
+}
