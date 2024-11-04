@@ -15,13 +15,13 @@ import {
   } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { apiClient } from "@/lib/api-client"
-import { GET_ALL_CONTACTS_ROUTES, SEARCH_CONTACTS_ROUTES } from "@/utils/constants"
+import { CREATE_CHANNEL_ROUTE, GET_ALL_CONTACTS_ROUTES, SEARCH_CONTACTS_ROUTES } from "@/utils/constants"
 import { useAppStore } from "@/store";
 import { Button } from "@/components/ui/button"
 import MultipleSelector from "@/components/ui/multiselect"
 
 const CreateChannel = () => {
-    const {setSelectedChatType,setSelectedChatData} = useAppStore()
+    const {setSelectedChatType,setSelectedChatData,addChannel} = useAppStore()
     const [newChannelModal,setNewChannelModal] = useState(false)
     const [searchedContacts, setSearchedContacts] = useState([])
     const [allContacts,setAllContacts] = useState([])
@@ -41,7 +41,13 @@ const CreateChannel = () => {
     
     const createChannel = async ()=>
     {
+       try {
+        
+        const response = await apiClient.get(CREATE_CHANNEL_ROUTE,{withCredentials:true})
 
+       } catch (error) {
+          console.log({error})
+       }
     }
 
     return(
