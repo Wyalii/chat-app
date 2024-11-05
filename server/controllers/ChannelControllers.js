@@ -1,5 +1,6 @@
 import { response } from "express";
 import User from "../models/UserModel.js";
+import Channel from "../models/ChannelModel.js";
 
 
 export const createChannel = async (request,response)=>{
@@ -8,7 +9,7 @@ export const createChannel = async (request,response)=>{
      const {name,members} = request.body;
      const userId = request.userId;
 
-     const admin = await User.findById()
+     const admin = await User.findById(userId)
 
      if(!admin)
      {
