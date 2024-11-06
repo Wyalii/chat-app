@@ -3,14 +3,14 @@ import ProfileInfo from "./components/profile-info";
 import NewDM from "./components/new-dm";
 import Kaguya from "@/assets/kaguya.gif"
 import { apiClient } from "@/lib/api-client";
-import { GET_DM_CONTACTS_ROUTES } from "@/utils/constants.js";
+import { GET_DM_CONTACTS_ROUTES,GET_USER_CHANNELS_ROUTE } from "@/utils/constants.js";
 import { useAppStore } from "@/store";
 import ContactList from "@/components/ui/contacts-list";
 import CreateChannel from "./components/create-channel";
 const ContactsContainer = () =>{
 
 
-  const {directMessagesContacts,setDirectMessagesContacts,channels} = useAppStore()
+  const {directMessagesContacts,setDirectMessagesContacts,channels,setChannels} = useAppStore()
 
     useEffect(()=>{
       
@@ -22,7 +22,17 @@ const ContactsContainer = () =>{
          }
       }
 
+
+      const getChannels = async ()=>{
+        const response = await apiClient.get(GET_USER_CHANNELS_ROUTE,{withCredentials:true})
+       
+        if(response.data.channels){
+          setChannels(response.data.channels)
+        }
+     }
+
       getContacts()
+      getChannels()
 
     },[])
 
