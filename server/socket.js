@@ -1,4 +1,5 @@
 import Message from "./models/MessagesModel.js";
+import Channel from "./models/ChannelModel.js";
 import {Server as SockerIOServer} from "socket.io"
 
 const setupSocket = (server) => {

@@ -33,11 +33,14 @@ export const SocketProvider = ({children}) =>{
               
            }
 
-           
+           if( selectedChatType !== undefined && selectedChatData === message.channelId)
+           {
+             addMessage(message)
+           }
+
         }
-
         socket.current.on("reciveMessage",handleReciveMessage)
-
+        
         return ()=>{
             socket.current.disconnect()
         }
